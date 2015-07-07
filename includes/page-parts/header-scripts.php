@@ -121,7 +121,11 @@
     <script src="<?php echo SITE_ROOT;  ?>assets/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
     <script src="<?php echo SITE_ROOT;  ?>assets/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
         <script src="<?php echo SITE_ROOT;  ?>assets/plugins/datatables/dataTables.tableTools.min.js" type="text/javascript"></script> 
-    
+<!-- JQuery Auto Complete JS  -->   
+	 <script src="<?php echo SITE_ROOT;  ?>assets/plugins/jQueryAutoComplete/jquery.autocomplete.js" type="text/javascript"></script> 
+	 <!-- JQuery Auto Complete CSS  -->   
+	    <link href="<?php echo SITE_ROOT;  ?>assets/plugins/jQueryAutoComplete/jquery.autocomplete.css" rel="stylesheet" type="text/css" />   
+     
     <!-- Time Ago Plugin -->
     <script src="<?php echo SITE_ROOT;  ?>assets/plugins/timeago/jquery.timeago.js"></script>
     <!-- DropZone Plugin -->
@@ -131,3 +135,4 @@
     <!-- fullCalendar 2.2.5 -->
     <script src="<?php echo SITE_ROOT;  ?>assets/plugins/fullcalendar/moment.min.js" type="text/javascript"></script>
     <script src="<?php echo SITE_ROOT;  ?>assets/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
+	 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">

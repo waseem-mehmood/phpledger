@@ -47,7 +47,7 @@
     		<li>
     			<a href="#"><span>Transactions</span><i class="fa fa-angle-left pull-right"></i></a>
     			<ul class="treeview-menu">
-	    			<li>
+	    			<!-- <li>
 	    					<a href="#"><span>Expense Vouchers</span><i class="fa fa-angle-left pull-right"></i></a>
                 		<ul class="treeview-menu">
 							<li>
@@ -58,7 +58,7 @@
 							</li>
 							
 						</ul>
-	    			</li>
+	    			</li> -->
 	    			<li>
 	    				<a href="#">Cash Reciepts</a>
 	    			</li>
@@ -66,8 +66,18 @@
 	    				<a href="#">Bank Transactions</a>
 	    			</li>
 					<li>
-						<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/transactions/jv/view_vouchers">Journal Vouchers</a>
-					</li>
+	    					<a href="#"><span>Journal Vouchers</span><i class="fa fa-angle-left pull-right"></i></a>
+                		<ul class="treeview-menu">
+							<li>
+								<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/transactions/jv/add_journal_voucher">Add Journal Voucher</a>
+							</li>
+							<li>
+								<a href="<?php echo SITE_ROOT; ?>?route=modules/gl/transactions/jv/view_expense_voucher">View Journal  Vouchers</a>
+							</li>
+							
+						</ul>
+	    			</li>
+				
   				</ul>
     		</li>
 		</ul>
