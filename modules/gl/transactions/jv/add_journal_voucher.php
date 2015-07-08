@@ -1,3 +1,32 @@
+<?php
+
+$now = getDateTime( date('now'),"mySQL" );
+if(isset($_POST['addExpenseVoucer'])){
+	$voucher_ref = $_POST['voucher_ref'];
+	$voucher_date = $_POST['voucher_date'];
+	$voucher_date = getDateTime( $voucher_date ,"mySQL" );
+	$entry_description = $_POST['entry_description'];
+	$insert = DB::insert(DB_PREFIX.$_SESSION['co_prefix'].'journal_vouchers', array(
+											'voucher_date'				=> 	$voucher_date
+											,'voucher description'		=>	$entry_description
+											,'voucher_ref_no'			=>	$voucher_ref
+											,'created_by'				=>	$_SESSION['user_name']
+											,'created_on'				=>	$now
+											,'voucher_status'			=>	'draft'
+											));
+	if($insert){
+		$voucher_id = DB::insertId();	
+		echo '<script>window.location.replace("'.$_SERVER['PHP_SELF'].'?route=modules/gl/transactions/jv/add_journal_voucher_detail&voucher_id='.$voucher_id.'");</script>';
+	} else{
+		echo '<script> alert("Whoops..! Something wrong") </script>';
+	}
+										
+	
+}
+
+
+?>
+
 <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
@@ -29,39 +58,26 @@
         <span class="sr-only">50% Complete  </span>
         </div>
       </div>
-<form class="form-horizontal" role="form" method="POST" action="<?php echo SITE_ROOT."index.php?route=modules/gl/transactions/expense/add_expense_voucher_detail" ?>">
+<form class="form-horizontal" role="form" method="POST" action="">
 				<div class="form-group">
-					<label class="col-md-3 col-sm-3 control-label">Voucher Ref#&nbsp;</label>
+					<label class="col-md-3 col-sm-3 control-label">Entry Ref#&nbsp;</label>
 						<div class="col-md-2 col-sm-2">
 						<input class="form-control" required="required" name="voucher_ref" id="voucher_ref" value="" />				
 						<p class="help-block"> </p>
 					</div><!-- /.col -->
 				</div> <!-- /form-group --> 
 				<div class="form-group">
-					<label class="col-md-3 col-sm-3 control-label">Voucher Date&nbsp;</label>
+					<label class="col-md-3 col-sm-3 control-label">Entry Date&nbsp;</label>
 						<div class="col-md-9 col-sm-9">
 						<input name="voucher_date" required="required" id="voucher_date"   class="date-picker form-control" size="16" type="text" value="" />				
 						<p class="help-block"> </p>
 					</div><!-- /.col -->
 				</div> <!-- /form-group --> 
+				
 				<div class="form-group">
-					<label class="col-md-3 col-sm-3 control-label">Paid From Account&nbsp;</label>
+					<label class="col-md-3 col-sm-3 control-label">Entry Description: &nbsp;</label>
 						<div class="col-md-9 col-sm-9">
-						<select required="required" class="form-control" name="voucher_paid_from_account" id="voucher_paid_from_account">
-						<?php 
-							$accounts = DB::query("SELECT c.`account_id`, c.`account_desc_short` FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa c WHERE c.`activity_account`=1 AND c.`account_status`='active'");
-							foreach($accounts as $account){
-						?>
-						<option value="<?php echo $account['account_id']; ?>"><?php echo $account['account_desc_short']; ?></option>	 
-						<?php } ?>
-					</select>				
-						<p class="help-block"> </p>
-					</div><!-- /.col -->
-				</div> <!-- /form-group --> 
-				<div class="form-group">
-					<label class="col-md-3 col-sm-3 control-label">Voucher Description: &nbsp;</label>
-						<div class="col-md-9 col-sm-9">
-				<textarea  name="account_desc_long" id="account_desc_long" class="form-control textarea"  ></textarea>				
+				<textarea  name="entry_description" id="entry_description" class="form-control textarea"  ></textarea>				
 						<p class="help-block"> </p>
 					</div><!-- /.col -->
 				</div> <!-- /form-group --> 

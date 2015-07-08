@@ -160,4 +160,14 @@ function printTree($arr) {
             }
             echo '</ul>';
         }
-    } 
+    }
+function getAccountDescirption($account_code){
+	$account_description_short = DB::queryFirstField("SELECT c.`account_desc_short` FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa c WHERE c.`account_code`='".$account_code."'");
+	if($account_description_short<>''){
+		return $account_desc_short;
+	} else {
+		return false;
+	}
+	
+	
+}	

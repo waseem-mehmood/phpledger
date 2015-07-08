@@ -29,7 +29,7 @@
         <span class="sr-only">50% Complete  </span>
         </div>
       </div>
-<form class="form-horizontal" role="form" method="POST" action="<?php echo SITE_ROOT."index.php?route=modules/gl/transactions/expense/add_expense_voucher_detail" ?>">
+<form class="form-horizontal" role="form" method="POST" action="<?php echo SITE_ROOT."index.php?route=modules/gl/transactions/expense/add_journal_voucher_detail" ?>">
 				<div class="form-group">
 					<label class="col-md-3 col-sm-3 control-label">Voucher Ref#&nbsp;</label>
 						<div class="col-md-2 col-sm-2">

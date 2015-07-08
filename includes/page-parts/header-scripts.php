@@ -121,10 +121,7 @@
     <script src="<?php echo SITE_ROOT;  ?>assets/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
     <script src="<?php echo SITE_ROOT;  ?>assets/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
         <script src="<?php echo SITE_ROOT;  ?>assets/plugins/datatables/dataTables.tableTools.min.js" type="text/javascript"></script> 
-<!-- JQuery Auto Complete JS  -->   
-	 <script src="<?php echo SITE_ROOT;  ?>assets/plugins/jQueryAutoComplete/jquery.autocomplete.js" type="text/javascript"></script> 
-	 <!-- JQuery Auto Complete CSS  -->   
-	    <link href="<?php echo SITE_ROOT;  ?>assets/plugins/jQueryAutoComplete/jquery.autocomplete.css" rel="stylesheet" type="text/css" />   
+  
      
     <!-- Time Ago Plugin -->
     <script src="<?php echo SITE_ROOT;  ?>assets/plugins/timeago/jquery.timeago.js"></script>
