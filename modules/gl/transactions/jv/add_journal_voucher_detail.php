@@ -88,8 +88,8 @@ $account_desc_long = $journal_voucher['voucher description'];
 						foreach($journal_sql as $journal){
 						?>
                       <tr>
-                        <td><?php echo $journal['account_id']; ?></td>
-                        <td><?php echo $journal['account_id'];  ?></td>
+                        <td><?php echo getAccountCode($journal['account_id']); ?></td>
+                        <td><?php echo getAccountDescirption($journal['account_id']);  ?></td>
                         <td><?php echo $journal['debit_amount'];  ?></td>
 						<td><?php echo $journal['credit_amount'];  ?></td>
                         <td><?php echo $journal['entry_description'];  ?></td>
@@ -149,7 +149,6 @@ $(document).ready(function(){
 				url: "<?php echo SITE_ROOT."includes/ajax-helpers/ajax_journal_voucher.php"; ?>",
 				data: $('#frm_journal_entry').serialize(),
 				success: function(msg){
-					alert(msg);
 					$("#addExpenseDetailModal").modal('hide');
 					window.location.reload();
 					},
@@ -175,10 +174,10 @@ $(document).ready(function(){
       <label class="control-label col-sm-4" for="expense_type">Account Description:</label>
       <div class="col-sm-8">
         <select class="form-control" id="account_description" name="account_description">
-		<?php $account_desc = DB::query("SELECT	c.`account_code`, c.`account_desc_short` FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa c WHERE c.`activity_account` = 1 AND c.`account_status`='active'"); 
+		<?php $account_desc = DB::query("SELECT	c.`account_id`, c.`account_desc_short` FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa c WHERE c.`activity_account` = 1 AND c.`account_status`='active'"); 
 		foreach($account_desc as $coa){
 		?>
-			<option value="<?php echo $coa['account_code']; ?>"><?php echo $coa['account_desc_short']; ?></option>
+			<option value="<?php echo $coa['account_id']; ?>"><?php echo $coa['account_desc_short']; ?></option>
 		<?php } ?>
 		</select>
       </div>

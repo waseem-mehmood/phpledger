@@ -161,13 +161,23 @@ function printTree($arr) {
             echo '</ul>';
         }
     }
-function getAccountDescirption($account_code){
-	$account_description_short = DB::queryFirstField("SELECT c.`account_desc_short` FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa c WHERE c.`account_code`='".$account_code."'");
+function getAccountDescirption($account_id){
+	$account_description_short = DB::queryFirstField("SELECT c.`account_desc_short` FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa c WHERE c.`account_id`='".$account_id."'");
 	if($account_description_short<>''){
-		return $account_desc_short;
+		return $account_description_short;
 	} else {
 		return false;
 	}
 	
 	
 }	
+function getAccountCode($account_id){
+	$account_code = DB::queryFirstField("SELECT c.`account_code` FROM ".DB_PREFIX.$_SESSION['co_prefix']."coa c WHERE c.`account_id`='".$account_id."'");
+	if($account_code<>''){
+		return $account_code;
+	} else {
+		return false;
+	}
+	
+	
+}
