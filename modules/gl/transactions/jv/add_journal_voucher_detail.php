@@ -94,7 +94,15 @@ $account_desc_long = $journal_voucher['voucher description'];
 						<td><?php echo $journal['credit_amount'];  ?></td>
                         <td><?php echo $journal['entry_description'];  ?></td>
 						
-                        <td><a href="#delExpenseDetailModal" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash"></i>&nbsp;Delete</a>
+                        <td><a href="#delExpenseDetailModal" class="delVoucherEntry btn btn-danger" data-voucher-detail-id = "<?php echo $journal['voucher_detail_id'];  ?>"
+						<?php if($journal['debit_amount'] == '0.00'){ ?>  
+						data-jv-amount = "<?php echo $journal['credit_amount'];  ?>"
+						 data-jv-type = "credit" 
+						<?php } else { ?>
+						data-jv-amount = "<?php echo $journal['debit_amount'];  ?>"
+						data-jv-type = "debit"
+						<?php } ?>
+						data-toggle="modal"><i class="fa fa-trash" ></i>&nbsp;Delete</a>
 						<a href="#editExpenseDetailModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-pencil"></i>&nbsp;Edit</a>
 						</td>
                       </tr>
@@ -157,9 +165,35 @@ $(document).ready(function(){
 					}
 			});
 		});
+		
+	$(document).on("click", ".delVoucherEntry", function () {
+		var JvAmount = $(this).data('jv-amount');
+		var JvType = $(this).data('jv-type');
+		var voucherDetailId = $(this).data('voucher-detail-id');
+		
+		$(".modal-body #voucher_detail_id").val( voucherDetailId );
+		$(".modal-body #voucher_amount").val( JvAmount );
+		$(".modal-body #voucher_type").val( JvType );
+		});
+		
+		$('#delEntry').click(function(){
+			$.ajax({
+				type: "POST",
+				url: "<?php echo SITE_ROOT."includes/ajax-helpers/ajax_journal_voucher.php"; ?>",
+				data: $('#frmDelEntry').serialize(),
+				success: function(msg){
+					$('#delExpenseDetailModal').modal('hide');
+					window.location.reload();
+				},
+				error: function(){
+					alert('Failure');
+				}
+			});
+		});
 });
 
 </script>
+
 
 <div id="addExpenseDetailModal" class="modal fade">
     <div class="modal-dialog">
@@ -278,16 +312,19 @@ $(document).ready(function(){
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="delModalLabel">Confirm Delete</h4>
       </div>
-<form role="form" method="POST"  id="frmdel2" name="delete" action="" class="form-inline" >
+<form role="form" method="POST"  id="frmDelEntry" name="frmDelEntry" action="" class="form-inline" >
  
       <div class="modal-body bg-warning">
        Are you sure you want to delete this Journal Entry..
-				<input type="hidden" name="voucher_detail_id" id="voucher_detail_id" value="0" />
+		<input type="hidden" name="voucher_detail_id" id="voucher_detail_id" value="0" />
+		<input type="hidden" name="voucher_amount" id="voucher_amount" value="0" />
+		<input type="hidden" name="voucher_type" id="voucher_type" value="0" />
 		<input type="hidden" name="operation" id="add-adj-operation" value="delEntry" />
+		<input type="hidden" name="voucher_id" id="voucher_id" value="<?php echo $voucher_id; ?>" />
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="submitdeladj btn btn-danger">Delete</button>
+        <button type="button" id="delEntry" name="delEntry" class="submitdelEntry btn btn-danger">Delete</button>
       </div>
 	  </form>
     </div>
